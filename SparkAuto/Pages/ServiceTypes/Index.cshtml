@@ -1,0 +1,65 @@
+﻿@page
+@model SparkAuto.Pages.ServiceTypes.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br /><br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Service Types</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-info">Create New Service</a>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if(Model.ServiceType.Count == 0)
+        {
+            <p>No new services added!</p><p>Add new services for your vehicle.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m=>m.ServiceType[0].Name)
+                    </th>
+                    <th class="table-secondary">
+                        @Html.DisplayNameFor(m => m.ServiceType[0].Price)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach(var item in Model.ServiceType)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                        <td style="width:200px;">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-primary text-white" asp-page="Edit" asp-route-id="@item.Id">
+                                    <img src="~/images/edit.ico" width="20" height="20" />
+                                </a>
+                                <a class="btn btn-success text-white" asp-page="Details" asp-route-id="@item.Id">
+                                    <img src="~/images/details.png" width="20" height="20" />
+                                </a>
+                                <a class="btn btn-danger text-white" asp-page="Delete" asp-route-id="@item.Id">
+                                    <img src="~/images/trash_can.png" width="20" height="20" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
+
+
